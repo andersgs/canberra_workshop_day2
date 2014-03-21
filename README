@@ -1,3 +1,15 @@
 Canberra Workshop Day2
 ======================
 This repository contains data, code and presentations prepared by Anders Goncalves da Silva for Day 2 of the Population and Landscape Genomics Workshop (CBA-ANU).
+
+Structure
+---------
+
+The files are distributed in folders according to sessions throughout the day. There is a mixture of R, Python, and Bash scripts and code. Each one will be used during the day. Eventually, I will add PDFs of the presentations that go with each session.
+
+Contact
+-------
+If you make any changes to the code, or you use it in any publications, please let me know. The code is free to be used, copied, and modified (see LICENSE).
+
+Anders Gonçalves da Silva
+andersgs at googlemail dot com
