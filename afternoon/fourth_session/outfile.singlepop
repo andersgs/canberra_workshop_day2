@@ -1,0 +1,197 @@
+  =============================================
+   migrate sim                                 
+  =============================================
+  MIGRATION RATE AND POPULATION SIZE ESTIMATION
+  using Markov Chain Monte Carlo simulation
+  =============================================
+  Version 3.6.4
+
+  Program started at Thu Mar 20 15:05:42 2014
+         finished at Thu Mar 20 15:06:51 2014
+     
+
+
+Options in use:
+---------------
+
+Analysis strategy is BAYESIAN INFERENCE
+
+Proposal distribution:
+Parameter group          Proposal type
+-----------------------  -------------------
+Population size (Theta)  Metropolis sampling
+
+
+Prior distribution (Proposal-delta will be tuned to acceptance frequence 0.440000):
+Parameter group          Prior type   Minimum    Mean(*)    Maximum    Delta
+-----------------------  ------------ ---------- ---------- ---------- ----------
+Population size (Theta)      Uniform  0.000000   2.500000   5.000000   0.500000 
+
+
+
+Datatype: DNA sequence data
+
+Inheritance scalers in use for Thetas (specified scalars=1)
+1.00 1.00 1.00 1.00 1.00 
+1.00 1.00 
+[Each Theta uses the (true) ineritance scalar of the first locus as a reference]
+
+
+Pseudo-random number generator: Mersenne-Twister                                
+Random number seed (with internal timer)            142502447
+
+Start parameters:
+   First genealogy was started using a random tree
+   Theta values were generated  from an FST-calculation
+   M values were generated from the FST-calculation
+
+Migration model:
+   Migration matrix model with variable Theta  
+
+Mutation rate is constant for all loci
+
+Markov chain settings:
+   Long chains (long-chains):                              1
+      Steps sampled (long-inc*samples):               500000
+      Steps recorded (long-sample):                     5000
+   Burn-in per replicate (samples*inc):              1000000
+
+Print options:
+   Data file:                               infile.singlepop
+   Output file (ASCII text):               outfile.singlepop
+   Output file (PDF):                  outfile.singlepop.pdf
+   Posterior distribution:                         bayesfile
+   Print data:                                            No
+   Print genealogies:                                     No
+   Plot data: No                                            
+
+Summary of data:
+Title:                                           migrate sim
+Data file:                                  infile.singlepop
+Datatype:                                      Sequence data
+Number of loci:                                            7
+
+Population                   Locus   Gene copies    
+----------------------------------------------------
+  1 Pop__0                       1        20
+  1                              2        20
+  1                              3        20
+  1                              4        20
+  1                              5        20
+  1                              6        20
+  1                              7        20
+    Total of all populations     1        20
+                                 2        20
+                                 3        20
+                                 4        20
+                                 5        20
+                                 6        20
+                                 7        20
+
+
+Empirical Base Frequencies
+------------------------------------------------------------
+Locus     Nucleotide                        Transition/
+          ------------------------------  Transversion ratio
+          A       C       G       T(U)
+------------------------------------------------------------
+   1      0.2245  0.2515  0.2940  0.2300       2.00000
+   2      0.2335  0.2790  0.2505  0.2370       2.00000
+   3      0.2355  0.3160  0.2105  0.2380       2.00000
+   4      0.2195  0.2295  0.2965  0.2545       2.00000
+   5      0.2430  0.2005  0.3080  0.2485       2.00000
+   6      0.1925  0.3140  0.2620  0.2315       2.00000
+   7      0.2510  0.3145  0.2605  0.1740       2.00000
+
+
+
+Bayesian estimates
+==================
+
+Locus Parameter        2.5%      25.0%    mode     75.0%   97.5%     median   mean
+-----------------------------------------------------------------------------------
+    1  Theta_1         0.04667  0.13000  0.18167  0.23333  0.34667  0.19167  0.19544
+    2  Theta_1         0.10333  0.19333  0.25500  0.31333  0.46667  0.27167  0.27744
+    3  Theta_1         0.12000  0.21333  0.27500  0.34000  0.49667  0.29500  0.30132
+    4  Theta_1         0.05667  0.13667  0.18833  0.24000  0.35333  0.19833  0.20135
+    5  Theta_1         0.00333  0.06667  0.11167  0.15000  0.21667  0.11500  0.11393
+    6  Theta_1         0.23000  0.35667  0.43500  0.53333  0.77000  0.47167  0.48569
+    7  Theta_1         0.03333  0.11000  0.16167  0.20667  0.30000  0.16833  0.16793
+  All  Theta_1         0.10667  0.17000  0.21167  0.25000  0.31000  0.21500 63.50167
+-----------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+Correlation matrix of parameters
+--------------------------------------------------------------------
+   Q1 
+Locus 1:
+ 1.00 
+
+Locus 2:
+ 1.00 
+
+Locus 3:
+ 1.00 
+
+Locus 4:
+ 1.00 
+
+Locus 5:
+ 1.00 
+
+Locus 6:
+ 1.00 
+
+Locus 7:
+ 1.00 
+
+
+
+Over all loci
+--------------------------------------------------------------------
+ 1.00 
+--------------------------------------------------------------------
+
+
+
+Log-Probability of the data given the model (marginal likelihood = log(P(D|thisModel))
+--------------------------------------------------------------------
+[Use this value for Bayes factor calculations:
+BF = Exp[log(P(D|thisModel) - log(P(D|otherModel)]
+shows the support for thisModel]
+
+
+
+Locus      Raw Thermodynamic score(1a)  Bezier approximated score(1b)     Harmonic mean(2)
+------------------------------------------------------------------------------------------
+        1           ------                           ------                 -399.21
+        2           ------                           ------                 -510.47
+        3           ------                           ------                 -550.71
+        4           ------                           ------                 -423.46
+        5           ------                           ------                 -364.44
+        6           ------                           ------                 -665.98
+        7           ------                           ------                 -417.02
+---------------------------------------------------------------------------------------
+      All           ------                           ------                -3318.11
+MCMC run characteristics
+========================
+
+
+
+
+Acceptance ratios for all parameters and the genealogies
+---------------------------------------------------------------------
+
+Parameter           Accepted changes               Ratio
+Theta_1                 732124/1750753           0.41818
+Genealogies             140535/1749247           0.08034
+Autocorrelation and Effective sample size
+-------------------------------------------------------------------
+
+  Parameter         Autocorrelation(*)   Effective Sample size
+  ---------         ---------------      ---------------------
+  Theta_1                0.30395             18914.85
+  Ln[Prob(D|P)]          0.82871              3288.56
+  (*) averaged over loci.
+
