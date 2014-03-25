@@ -39,7 +39,10 @@ sim_ncoal_growth = function(N,n_genes,alpha,gen=0,max){
   return(tau)
 }
 
-#simulate a genealogy
+#simulate a genealogy where population suffered a bottleneck 1000 generations ago
+n_genes = 25
+n_diploid_ind = 10000
+
 sim_times = sim_ncoal_growth(n_diploid_ind,n_genes,alpha=-5*10^-5,gen=1000,max=10^5)
 
 #transform it into a coalescentIntervals object
@@ -69,7 +72,7 @@ attr(x,"class")<-"coalescentIntervals"
 plot(skyline(x,-1))
 
 #use reversible-jump MCMC
-mcmc.out <- mcmc.popsize(x,nstep=100000)
+mcmc.out <- mcmc.popsize(x,nstep=10000)
 popsize <- extract.popsize(mcmc.out)
 
 plot(popsize)

@@ -21,11 +21,12 @@
 #  Coalesce
 
 # Let us first see how the probability distribution changes with each k
-n_genes = 25
+n_genes = 5
 n_diploid_ind = 10000
 
 # a set of potential coalescent times, in number of generations
 coal_times=seq(1,40000,100)
+coal_times
 
 # a function to calculate the probability of observing a certain coalescent time
 #  given number of genes (k) and effective population size (N)
@@ -87,18 +88,24 @@ sim_times = sim_ncoal(n_diploid_ind,n_genes)
 #distribution of time to MRCA
 dist_total_height=replicate(n=10000,sum(sim_ncoal(n_diploid_ind,n_genes)))
 hist(dist_total_height,breaks=100,xlab=c("Total tree hight (generations)"),ylab="Density",freq=F)
+
+#add a line to the histogram that shows where our current simulation sits
 abline(v=sum(sim_times),col='red',lwd=2)
 
 #plotting the likelihood surface
+#we are doing this numerically
+#so, first we choose a number of potential population sizes
 poss_N = seq(1000,50000,100)
 
-loglike = sapply(poss_times,coal_like,obs_times=sim_times, n_genes=n_genes)
+#calculate the log-likelihood for each population size
+loglike = sapply(poss_N,coal_like,obs_times=sim_times, n_genes=n_genes)
 
+#plot the surface
 #on the log-scale
-plot(poss_times,loglike,type='l',xlab='Population size (N)',ylab="logLike(N|obsTimes,k)")
+plot(poss_N,loglike,type='l',xlab='Population size (N)',ylab="logLike(N|obsTimes,k)")
 
 #on the natural scale
-plot(poss_times,exp(loglike-max(loglike))/sum(exp(loglike-max(loglike))),type='l',xlab='Population size (N)',ylab="Like(N|obsTimes,k)")
+plot(poss_N,exp(loglike-max(loglike))/sum(exp(loglike-max(loglike))),type='l',xlab='Population size (N)',ylab="Like(N|obsTimes,k)")
 
 #estimate N using maximum likelihood
 ml_N = optim(par=100,coal_like,obs_times=sim_times,n_genes=n_genes,control=list(fnscale=-1),hessian=T,method='Brent',lower=100,upper=10000)
@@ -141,18 +148,23 @@ sim_times
 #where do our 10 trees sit in the distribution of possible tree heights
 dist_total_height=replicate(n=10000,sum(sim_ncoal(n_diploid_ind,n_genes)))
 hist(dist_total_height,breaks=100,xlab=c("Total tree hight (generations)"),ylab="Density",freq=F)
+
+#add a lines to the histogram that shows where our current simulations sit
 abline(v=apply(sim_times,2,sum),col='red',lwd=2)
 
 # ploting the likelihood surface
+#choose potential N
 poss_N = seq(1000,50000,100)
 
-loglike = sapply(poss_times,coal_like_multi,obs_times=sim_times, n_genes=n_genes)
+#calculate the log-likelihood for these values
+loglike = sapply(poss_N,coal_like_multi,obs_times=sim_times, n_genes=n_genes)
 
+#plot the surface
 #on the log-scale
-plot(poss_times,loglike,type='l',xlab='Population size (N)',ylab="logLike(N|obsTimes,k)")
+plot(poss_N,loglike,type='l',xlab='Population size (N)',ylab="logLike(N|obsTimes,k)")
 
 #on the natural scale
-plot(poss_times,exp(loglike-max(loglike))/sum(exp(loglike-max(loglike))),type='l',xlab='Population size (N)',ylab="Like(N|obsTimes,k)")
+plot(poss_N,exp(loglike-max(loglike))/sum(exp(loglike-max(loglike))),type='l',xlab='Population size (N)',ylab="Like(N|obsTimes,k)")
 
 #estimate N using maximum likelihood
 mlN = optim(par=100,coal_like_multi,obs_times=sim_times,n_genes=n_genes,control=list(fnscale=-1),hessian=T,method='Brent',lower=100,upper=10000)
