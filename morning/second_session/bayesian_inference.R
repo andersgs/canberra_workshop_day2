@@ -15,7 +15,7 @@
 # it assumes a Beta(alpha,beta) distribution for the counts of 'heads' and 'tails'
 
 llike = function(theta,al,be){
-return(dbeta(theta,shape1=al,shape2=be,log=T))
+  return(dbeta(theta,shape1=al,shape2=be,log=T))
 }
 
 #the prior function: calculate the probability of theta given prior knowledge on the
@@ -86,6 +86,7 @@ mcmc = function(data,steps,alpha,beta,prop_window){
 
 #generate some data
 dat=replicate(n=100,rbinom(n=1,size=1,prob=0.8))
+dat
 
 #run the mcmc
 #parameters

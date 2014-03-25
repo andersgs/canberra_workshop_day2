@@ -1,0 +1,22 @@
+# First step, create an input file using the structure_input_file.R
+
+#Second step, make sure mainparams and extraparams files are in order
+
+#Third, run structure in parallel by using the following command
+parallel ./par_struc.sh 5 ::: {0..24}
+# This command will take run the par_struc.sh command with a maximum reps of 5
+#  and it will run for a total of 25 runs. This will ensure that STRUCTURE runs
+#  for K =1-5 with 5 reps each
+
+#Fourth, run the parse_stuct.py file parse out the chains.
+./parse_struct.py chain_K2
+
+#Fifth, open the chains in R, and check for convergence
+# use the structure_analysis.R
+
+#Sixth, run structureHarvester.py
+# It can be downloaded from here: http://users.soe.ucsc.edu/~dearl/software/structureHarvester/
+structureHarvester.py --dir=. --out=. --evanno --clumpp
+
+#Use CLUMPP and Distruct
+# That is left as homework

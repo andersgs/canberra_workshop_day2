@@ -52,7 +52,7 @@ sim_data = function(npop,nind,nloc,nal,mig,mut,eff_size){
   #sample allele frequencies for each locus from a Dirichlet distribution
   allele_frequencies = rdirichlet(n=nloc,alpha=rep(1,nal))
   
-  #weight the frequencies by the expected migration/mutation
+  #weigh the frequencies by the expected migration/mutation
   alpha = allele_frequencies*4*eff_size*(mig+mut)
   
   #create some storage for the alleles at each locus for each individual
