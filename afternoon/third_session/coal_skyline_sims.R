@@ -1,3 +1,11 @@
+# Inferences on population growth with the coalescent
+# A skyline approach
+# by Anders Gonçalves da Silva (C) 2014
+# email: andersgs@gmail.com
+# 20 March 2014
+
+#load the ape library
+# it has a number of relevant functions we will need
 library(ape)
 
 #population history
@@ -19,11 +27,9 @@ sim_ncoal_growth = function(N,n_genes,alpha,gen=0,max){
   		N = N*exp(-alpha*(sum(tau)-gen))
   		if((alpha < 0) && (N > max)){
   			N=max
-  		} else {
-  			if((alpha > 0) && (N < max)){
+  		} else if((alpha > 0) && (N < max)){
   				N=max
   			}
-  		}
   		print(N)
   	}
     tau[k-1] = rgeom(n=1,prob=(choose(k,2)*(1/(2*N))))
@@ -33,24 +39,38 @@ sim_ncoal_growth = function(N,n_genes,alpha,gen=0,max){
   return(tau)
 }
 
+#simulate a genealogy
+sim_times = sim_ncoal_growth(n_diploid_ind,n_genes,alpha=-5*10^-5,gen=1000,max=10^5)
 
-pops = matrix(0,nrow=1000,ncol=24)
-for(i in 1:1000){
-pops[i,]=sim_ncoal_growth(n_diploid_ind,n_genes,alpha=-6*10^-5,gen=1000,max=10^5)
-}
-
-sim_times = apply(pops,2,median)
-sim_times = sim_ncoal_growth(n_diploid_ind,n_genes,alpha=-5*10^-5,gen=1000)
+#transform it into a coalescentIntervals object
 x=list(lineages=seq(25,2),interval.length=rev(sim_times),interval.count=length(sim_times),total.depth=sum(sim_times))
 attr(x,"class")<-"coalescentIntervals"
 
+#plot the classic skyline plot
+plot(skyline(x))
+
+#plot the generalized skyline plot
 plot(skyline(x,-1))
+
+#let us try with 1000 loci
+locs = matrix(0,nrow=1000,ncol=24)
+for(i in 1:1000){
+locs[i,]=sim_ncoal_growth(n_diploid_ind,n_genes,alpha=-6*10^-5,gen=1000,max=10^5)
+}
+
+#get mean interval lengths across genealogies
+sim_times = apply(locs,2,mean)
+
+#transform to a coalescentIntervals object
+x=list(lineages=seq(25,2),interval.length=rev(sim_times),interval.count=length(sim_times),total.depth=sum(sim_times))
+attr(x,"class")<-"coalescentIntervals"
+
+#calculate the generalized skyline plot
+plot(skyline(x,-1))
+
+#use reversible-jump MCMC
 mcmc.out <- mcmc.popsize(x,nstep=100000)
 popsize <- extract.popsize(mcmc.out)
 
 plot(popsize)
 abline(h=c(10^4,10^5))
-attributes(popsize)
-mean(popsize[,2])
-popsize
-length(sim_times)

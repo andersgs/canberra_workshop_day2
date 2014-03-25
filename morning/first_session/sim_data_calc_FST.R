@@ -136,5 +136,8 @@ boxplot(list(test1,test2,test3))
 abline(h=0.1,col='red')
 
 
+#check out what else adegenet does
+library(help=adegenet)
+
 ####
 #test_fstat = replicate(n=100,wc(sim.genot(size=20,nbal=2,nbloc=100,nbpop=10,N=20000,mig=0.0001,mut=10^-9,f=0))$FST)
