@@ -9,8 +9,7 @@ library(reshape2)
 library(adegenet)
 library(hierfstat)
 
-
-
+#possible alleles
 possible_alleles = c('A','T','C','G')
 
 
@@ -70,19 +69,30 @@ sim_data = function(npop,nind,nloc,nal,mig,mut,eff_size){
 }
 
 test_df=sim_data(npop=10,nind=20,nloc=1000,nal=2,mig=0.0001,mu=10^-9,eff_size=10^4)
-
+test_df[1:10,]
+library(help="adegenet")
+?genind
 #reading the data into R
 test_df = read.table("morning/first_session/test_data.txt",header=T)
 
 #transforming it into a Genind object
 
 test_genotype = paste(test_df[,4],test_df[,5],sep='.')
+test_genotype[1:10]
+test_df[1:3,]
 
 test_df$genotype<-test_genotype
+test_df[1:3,]
 
 test_df_wide=dcast(test_df,pop+ind~loc,value.var='genotype')
 
-test_genind=df2genind(X=test_df_wide[,3:12],sep='\\.',ind.names=test_df_wide[,2],pop=test_df_wide[,1],loc.names=colnames(test_df_wide[,3:12]))
+test_df_wide[1:5,1:5]
+
+dim(test_df_wide)
+
+test_genind=df2genind(X=test_df_wide[,3:1002],sep='\\.',ind.names=test_df_wide[,2],pop=test_df_wide[,1],loc.names=colnames(test_df_wide[,3:1002]))
+
+test_genind
 
 fstat(test_genind)
 

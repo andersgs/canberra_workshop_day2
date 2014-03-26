@@ -90,6 +90,7 @@ dat
 
 #run the mcmc
 #parameters
+
 alpha=25
 beta=25
 chain=mcmc(dat,10000,alpha=alpha,beta=beta,prop_window=0.5)
@@ -134,7 +135,7 @@ dat=replicate(n=10,rbinom(n=1,size=1,prob=0.8))
 #parameters
 alpha=1
 beta=1
-chain=mcmc(dat,10000,alpha=alpha,beta=beta,prop_window=0.5)
+chain=mcmc(dat,10000,alpha=alpha,beta=beta,prop_window=0.01)
 
 ################
 #four plot panel

@@ -108,7 +108,7 @@ plot(poss_N,loglike,type='l',xlab='Population size (N)',ylab="logLike(N|obsTimes
 plot(poss_N,exp(loglike-max(loglike))/sum(exp(loglike-max(loglike))),type='l',xlab='Population size (N)',ylab="Like(N|obsTimes,k)")
 
 #estimate N using maximum likelihood
-ml_N = optim(par=100,coal_like,obs_times=sim_times,n_genes=n_genes,control=list(fnscale=-1),hessian=T,method='Brent',lower=100,upper=10000)
+ml_N = optim(par=100,coal_like,obs_times=sim_times,n_genes=n_genes,control=list(fnscale=-1),hessian=T,method='Brent',lower=100,upper=100000)
 ml_N$par
 #standard deviation
 sqrt(solve(-1*ml_N$hessian))
@@ -167,7 +167,7 @@ plot(poss_N,loglike,type='l',xlab='Population size (N)',ylab="logLike(N|obsTimes
 plot(poss_N,exp(loglike-max(loglike))/sum(exp(loglike-max(loglike))),type='l',xlab='Population size (N)',ylab="Like(N|obsTimes,k)")
 
 #estimate N using maximum likelihood
-mlN = optim(par=100,coal_like_multi,obs_times=sim_times,n_genes=n_genes,control=list(fnscale=-1),hessian=T,method='Brent',lower=100,upper=10000)
+mlN = optim(par=100,coal_like_multi,obs_times=sim_times,n_genes=n_genes,control=list(fnscale=-1),hessian=T,method='Brent',lower=100,upper=100000)
 mlN$par
 #standard deviation
 sqrt(solve(-1*mlN$hessian))
