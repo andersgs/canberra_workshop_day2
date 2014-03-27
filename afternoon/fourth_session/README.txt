@@ -1,3 +1,9 @@
+#To work on this tutorial, you will need ms and seq-gen. These can be downloaded from:
+# ms:
+# http://home.uchicago.edu/rhudson1/source/mksamples.html
+# seq-gen:
+# http://tree.bio.ed.ac.uk/software/seqgen/
+
 #creating simulated dataset to test migrate-n
 
 #for a single pop and seven loci
